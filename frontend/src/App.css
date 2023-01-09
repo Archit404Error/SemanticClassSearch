@@ -1,3 +1,8 @@
+a {
+  font-weight: bold;
+  color: #61dafb;
+}
+
 .App {
   text-align: center;
 }
@@ -15,4 +20,8 @@
 
 .Highlight {
   color: #61dafb;
+}
+
+.smallMargin {
+  margin-top: 10px;
 }

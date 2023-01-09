@@ -10,6 +10,7 @@ const App = () => {
           <h2>I want to find a class about...</h2>
           <CourseQueries />
         </div>
+        <p>Site built by <a target="_blank" href="https://architmehta.me" rel="noreferrer">Archit Mehta</a></p>
       </header>
     </div >
   )
