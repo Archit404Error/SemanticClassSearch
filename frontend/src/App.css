@@ -3,6 +3,10 @@ a {
   color: #61dafb;
 }
 
+span {
+  color: #61dafb;
+}
+
 .App {
   text-align: center;
 }
@@ -16,10 +20,6 @@ a {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.Highlight {
-  color: #61dafb;
 }
 
 .smallMargin {
