@@ -7,7 +7,7 @@ const CourseQueries = () => {
 
     const fetchSimiliarCourses = async (query) => {
         if (query === '') return;
-        let res = await fetch(`http://localhost:8000/search?query=${query}&amt=10`)
+        let res = await fetch(`http://localhost:8000/search?query=${query}&amt=20`)
         setCourses(await res.json())
     }
 
@@ -15,7 +15,7 @@ const CourseQueries = () => {
         <div className="CourseQueries">
             <SearchBar submitFunc={fetchSimiliarCourses} />
             {
-                courses.length > 0 && courses[0].similarity < 0.4 &&
+                courses.length > 0 && courses[0].similarity < 0.5 &&
                 <div style={{ width: "60vw", textAlign: 'left', marginTop: 30, backgroundColor: '#3E4451', padding: 40, paddingLeft: 60 }}>
                     <p>Note: there were no great matches on this topic, but some potential matches are displayed below.</p>
                 </div>
