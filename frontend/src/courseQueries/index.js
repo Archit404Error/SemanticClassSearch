@@ -7,7 +7,7 @@ const CourseQueries = () => {
 
     const fetchSimiliarCourses = async (query) => {
         if (query === '') return;
-        let res = await fetch(`http://34.150.144.93:8000/search?query=${query}&amt=20`)
+        let res = await fetch(`https://backend.cornellcourses.org/search?query=${query}&amt=20`)
         setCourses(await res.json())
     }
 
