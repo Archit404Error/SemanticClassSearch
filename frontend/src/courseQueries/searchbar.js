@@ -6,7 +6,7 @@ const SearchBar = ({ submitFunc }) => {
     console.log(submitFunc)
     return (
         <TextField
-            label="Generative AI, Philosophy, American History, etc."
+            label="Ex: Generative AI, Starting a Business, Adventurous Outdoor PE Sports"
             onKeyDown={event => {
                 if (event.key === 'Enter') {
                     const query = event.target.value.replaceAll(' ', '+');
@@ -22,6 +22,7 @@ const SearchBar = ({ submitFunc }) => {
                 "& .MuiOutlinedInput-root.Mui-disabled": { "& > fieldset": { border: '2px solid #61dafb' } },
                 "& .MuiOutlinedInput-root:hover": { "& > fieldset": { border: '2px solid #61dafb' } },
                 "& .MuiOutlinedInput-root:active": { "& > fieldset": { border: '2px solid #61dafb' } },
+                "& .MuiOutlinedInput-root:focus": { "& > fieldset": { border: '2px solid #61dafb' } },
             }}
             InputProps={{
                 endAdornment: (
