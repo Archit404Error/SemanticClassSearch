@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { IconButton, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 const SearchBar = ({ submitFunc }) => {
-    console.log(submitFunc)
+    const [query, setQuery] = useState('')
     return (
         <TextField
             label="Ex: Generative AI, Starting a Business, Adventurous Outdoor PE Sports"
@@ -11,11 +12,14 @@ const SearchBar = ({ submitFunc }) => {
                 if (event.key === 'Enter') {
                     const query = event.target.value.replaceAll(' ', '+');
                     submitFunc(query);
+                } else {
+                    setQuery(event.target.value)
                 }
             }}
             sx={{
                 m: 1,
                 width: '40vw',
+                minWidth: '400px',
                 input: { color: 'white' },
                 "& .MuiInputLabel-root": { color: '#61dafb', fontStyle: 'italic', opacity: 0.7 },
                 "& .MuiOutlinedInput-root": { "& > fieldset": { border: '2px solid #61dafb' } },
@@ -27,8 +31,8 @@ const SearchBar = ({ submitFunc }) => {
             InputProps={{
                 endAdornment: (
                     <InputAdornment>
-                        <IconButton>
-                            <SearchIcon style={{ color: "#61dafb", marginRight: 10 }} />
+                        <IconButton onClick={() => submitFunc(query.replaceAll(' ', '+'))}>
+                            <SearchIcon style={{ color: "#61dafb" }} />
                         </IconButton>
                     </InputAdornment>
                 )
