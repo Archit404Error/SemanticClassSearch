@@ -19,7 +19,7 @@ const SearchBar = ({ submitFunc }) => {
             sx={{
                 m: 1,
                 width: '40vw',
-                minWidth: '400px',
+                minWidth: '350px',
                 input: { color: 'white' },
                 "& .MuiInputLabel-root": { color: '#61dafb', fontStyle: 'italic', opacity: 0.7 },
                 "& .MuiOutlinedInput-root": { "& > fieldset": { border: '2px solid #61dafb' } },

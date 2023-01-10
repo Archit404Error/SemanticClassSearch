@@ -4,7 +4,7 @@ from flask_cors import CORS, cross_origin
 from nlp_utils import recommend_courses
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/search": {"origins": "*"}})
+cors = CORS(app)
 app.config["CORS_HEADERS"] = "Content-Type"
 
 
@@ -13,9 +13,7 @@ app.config["CORS_HEADERS"] = "Content-Type"
 def search():
     query = request.args.get("query")
     amt = int(request.args.get("amt"))
-    response = jsonify(recommend_courses(query, amt))
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    return response
+    return jsonify(recommend_courses(query, amt))
 
 
 if __name__ == "__main__":
