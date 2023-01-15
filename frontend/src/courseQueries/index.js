@@ -7,8 +7,11 @@ const CourseQueries = () => {
     const [courses, setCourses] = useState([])
     const [query, setQuery] = useState('')
     const [amt, setAmt] = useState(20)
+    const [level, setLevel] = useState(2000)
 
-    const fetchSimiliarCourses = async (userQuery, resAmt = 20) => {
+    const fetchSimiliarCourses = async ({ userQuery = query, resAmt = amt, resLevel = level } = {}) => {
+        setQuery(userQuery)
+        console.log(`QUERY: ${userQuery}`)
         if (userQuery === '') return;
         let res = await fetch(`https://backend.cornellcourses.org/search?query=${userQuery}&amt=${resAmt}`)
         setCourses(await res.json())
@@ -16,7 +19,7 @@ const CourseQueries = () => {
 
     return (
         <div>
-            <SearchBar submitFunc={fetchSimiliarCourses} query={query} queryChange={setQuery} amt={amt} />
+            <SearchBar submitFunc={fetchSimiliarCourses} />
             <div style={{ display: 'flex' }}>
                 <div style={{ marginLeft: '10vw' }}>
                     {
@@ -38,7 +41,14 @@ const CourseQueries = () => {
                 </div>
                 {
                     courses.length > 0 &&
-                    <ActionAccordion submitFunc={fetchSimiliarCourses} query={query} amt={amt} setAmt={setAmt} />
+                    <ActionAccordion
+                        submitFunc={fetchSimiliarCourses}
+                        query={query}
+                        amt={amt}
+                        setAmt={setAmt}
+                        level={level}
+                        setLevel={setLevel}
+                    />
                 }
             </div>
         </div>
