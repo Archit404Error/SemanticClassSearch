@@ -2,6 +2,7 @@ import { useState } from "react"
 import SearchBar from "./searchbar"
 import '../App.css';
 import ActionAccordion from "./accordion";
+import { Alert } from "@mui/material";
 
 const CourseQueries = () => {
     const [courses, setCourses] = useState([])
@@ -16,7 +17,12 @@ const CourseQueries = () => {
         let res = await fetch(
             `https://backend.cornellcourses.org/search?query=${userQuery}&amt=${resAmt}&dep=${resDep}&level=${resLevel}`
         )
-        setCourses(await res.json())
+        const courseData = await res.json()
+        if (courseData.length === 0) {
+            Alert.alert('No courses found for these parameters.')
+        } else {
+            setCourses(await res.json())
+        }
     }
 
     return (
