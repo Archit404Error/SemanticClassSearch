@@ -31,7 +31,7 @@ const AccTab = ({ title, children }) => {
 
 const ActionAccordion = ({ submitFunc, amt, setAmt, dep, setDep, level, setLevel }) => {
     return (
-        <div style={{ alignSelf: 'flex-start', margin: 30, position: 'sticky', position: '-webkit-sticky', top: 30 }}>
+        <div style={{ alignSelf: 'flex-start', margin: 30, position: 'sticky', top: 30 }}>
             <AccTab title="Results Shown">
                 <FormControl>
                     <InputLabel>Results</InputLabel>
