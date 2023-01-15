@@ -21,7 +21,7 @@ const CourseQueries = () => {
         if (courseData.length === 0) {
             Alert.alert('No courses found for these parameters.')
         } else {
-            setCourses(await res.json())
+            setCourses(courseData)
         }
     }
 
