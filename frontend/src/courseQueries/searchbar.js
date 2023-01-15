@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { IconButton, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
-const SearchBar = ({ submitFunc }) => {
-    const [query, setQuery] = useState('')
+const SearchBar = ({ submitFunc, query, queryChange }) => {
     return (
         <TextField
             label="Ex: Generative AI, Starting a Business, Adventurous Outdoor PE Sports"
@@ -13,7 +11,7 @@ const SearchBar = ({ submitFunc }) => {
                     const query = event.target.value.replaceAll(' ', '+');
                     submitFunc(query);
                 } else {
-                    setQuery(event.target.value)
+                    queryChange(event.target.value)
                 }
             }}
             sx={{
