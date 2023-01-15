@@ -50,7 +50,12 @@ const ActionAccordion = ({ submitFunc, amt, setAmt, dep, setDep, level, setLevel
                 <Autocomplete
                     disablePortal
                     value={dep}
-                    onChange={(ev, newValue) => { setDep(newValue); submitFunc({ resDep: newValue }) }}
+                    onChange={(ev, newValue) => {
+                        if (newValue !== '') {
+                            setDep(newValue)
+                            submitFunc({ resDep: newValue })
+                        }
+                    }}
                     options={courseDeps}
                     renderInput={(params) => <TextField {...params} label="Department" />}
                 />
