@@ -6,16 +6,17 @@ import ActionAccordion from "./accordion";
 const CourseQueries = () => {
     const [courses, setCourses] = useState([])
     const [query, setQuery] = useState('')
+    const [amt, setAmt] = useState(20)
 
-    const fetchSimiliarCourses = async (userQuery, amt = 20) => {
+    const fetchSimiliarCourses = async (userQuery, resAmt = 20) => {
         if (userQuery === '') return;
-        let res = await fetch(`https://backend.cornellcourses.org/search?query=${userQuery}&amt=${amt}`)
+        let res = await fetch(`https://backend.cornellcourses.org/search?query=${userQuery}&amt=${resAmt}`)
         setCourses(await res.json())
     }
 
     return (
         <div>
-            <SearchBar submitFunc={fetchSimiliarCourses} query={query} queryChange={setQuery} />
+            <SearchBar submitFunc={fetchSimiliarCourses} query={query} queryChange={setQuery} amt={amt} />
             <div style={{ display: 'flex' }}>
                 <div style={{ marginLeft: '10vw' }}>
                     {
@@ -37,7 +38,7 @@ const CourseQueries = () => {
                 </div>
                 {
                     courses.length > 0 &&
-                    <ActionAccordion submitFunc={fetchSimiliarCourses} query={query} />
+                    <ActionAccordion submitFunc={fetchSimiliarCourses} query={query} amt={amt} setAmt={setAmt} />
                 }
             </div>
         </div>

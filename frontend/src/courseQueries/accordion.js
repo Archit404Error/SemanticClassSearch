@@ -19,9 +19,7 @@ const AccTab = ({ title, children }) => {
     )
 }
 
-const ActionAccordion = ({ submitFunc, query }) => {
-    const [resultCount, setResultCount] = useState(20)
-
+const ActionAccordion = ({ submitFunc, query, amt, setAmt }) => {
     return (
         <div style={{ alignSelf: 'flex-start', margin: 30, position: 'sticky', position: '-webkit-sticky', top: 30 }}>
             <AccTab title="Results Shown">
@@ -30,9 +28,9 @@ const ActionAccordion = ({ submitFunc, query }) => {
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        value={resultCount}
+                        value={amt}
                         label="Results"
-                        onChange={(ev) => { setResultCount(ev.target.value); submitFunc(query, ev.target.value) }}
+                        onChange={(ev) => { setAmt(ev.target.value); submitFunc(query, ev.target.value) }}
                     >
                         <MenuItem value={20}>20</MenuItem>
                         <MenuItem value={50}>50</MenuItem>
