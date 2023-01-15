@@ -61,7 +61,7 @@ def recommend_courses(inp, num_recs, dep, level):
         course = GeneratedCourse(course_data[i], pct)
         if (
             (dep != "None" and course.dept != dep)
-            or course.number > level
+            or int(course.number) > level
             or course.title in titles
         ):
             continue

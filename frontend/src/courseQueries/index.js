@@ -14,7 +14,7 @@ const CourseQueries = () => {
         setQuery(userQuery)
         if (userQuery === '') return;
         let res = await fetch(
-            `https://backend.cornellcourses.org/search?query=${userQuery}&amt=${resAmt}&dep=${resDep}&level=${resLevel}}`
+            `https://backend.cornellcourses.org/search?query=${userQuery}&amt=${resAmt}&dep=${resDep}&level=${resLevel}`
         )
         setCourses(await res.json())
     }
