@@ -51,7 +51,7 @@ def preprocess(text):
     return tokenize(remove_stopwords(clean(text)))
 
 
-def recommend_courses(inp, num_recs):
+def recommend_courses(inp, num_recs, dep, level):
     inp = inp.replace("+", " ")
     inf = vec_model.infer_vector(preprocess(inp))
     sims = vec_model.dv.most_similar([inf], topn=100)
@@ -59,9 +59,16 @@ def recommend_courses(inp, num_recs):
     titles = set()
     for i, pct in sims:
         course = GeneratedCourse(course_data[i], pct)
-        if course.title not in titles:
-            titles.add(course.title)
-            gen_courses.append(course.serialize())
-            if len(titles) == num_recs:
-                break
+        if (
+            (dep != "None" and course.dept != dep)
+            or course.number > level
+            or course.title in titles
+        ):
+            continue
+
+        titles.add(course.title)
+        gen_courses.append(course.serialize())
+
+        if len(titles) == num_recs:
+            break
     return gen_courses

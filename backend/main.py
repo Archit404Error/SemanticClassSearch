@@ -15,7 +15,9 @@ Talisman(app, content_security_policy=None)
 def search():
     query = request.args.get("query")
     amt = int(request.args.get("amt"))
-    return jsonify(recommend_courses(query, amt))
+    dep = request.args.get("dep")
+    level = int(request.args.get("level"))
+    return jsonify(recommend_courses(query, amt, dep, level))
 
 
 if __name__ == "__main__":

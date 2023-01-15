@@ -29,7 +29,7 @@ const AccTab = ({ title, children }) => {
     )
 }
 
-const ActionAccordion = ({ submitFunc, amt, setAmt, level, setLevel }) => {
+const ActionAccordion = ({ submitFunc, amt, setAmt, dep, setDep, level, setLevel }) => {
     return (
         <div style={{ alignSelf: 'flex-start', margin: 30, position: 'sticky', position: '-webkit-sticky', top: 30 }}>
             <AccTab title="Results Shown">
@@ -49,6 +49,8 @@ const ActionAccordion = ({ submitFunc, amt, setAmt, level, setLevel }) => {
             <AccTab title="Restrict Department">
                 <Autocomplete
                     disablePortal
+                    value={dep}
+                    onChange={(ev, newValue) => { setDep(newValue); submitFunc({ resDep: newValue }) }}
                     options={courseDeps}
                     renderInput={(params) => <TextField {...params} label="Department" />}
                 />

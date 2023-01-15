@@ -7,12 +7,15 @@ const CourseQueries = () => {
     const [courses, setCourses] = useState([])
     const [query, setQuery] = useState('')
     const [amt, setAmt] = useState(20)
-    const [level, setLevel] = useState(2000)
+    const [level, setLevel] = useState(7000)
+    const [dep, setDep] = useState('None')
 
-    const fetchSimiliarCourses = async ({ userQuery = query, resAmt = amt, resLevel = level } = {}) => {
+    const fetchSimiliarCourses = async ({ userQuery = query, resAmt = amt, resDep = dep, resLevel = level } = {}) => {
         setQuery(userQuery)
         if (userQuery === '') return;
-        let res = await fetch(`https://backend.cornellcourses.org/search?query=${userQuery}&amt=${resAmt}`)
+        let res = await fetch(
+            `https://backend.cornellcourses.org/search?query=${userQuery}&amt=${resAmt}&dep=${resDep}&level=${resLevel}}`
+        )
         setCourses(await res.json())
     }
 
@@ -45,6 +48,8 @@ const CourseQueries = () => {
                         query={query}
                         amt={amt}
                         setAmt={setAmt}
+                        dep={dep}
+                        setDep={setDep}
                         level={level}
                         setLevel={setLevel}
                     />
