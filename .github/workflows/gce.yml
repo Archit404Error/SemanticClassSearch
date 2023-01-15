@@ -64,7 +64,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.PRIVATE_KEY }}
-          scripts: |
+          script: |
             sudo su
             docker rmi -f sem-class
             docker login -u $DOCKER_USER -p $DOCKER_PASS
