@@ -61,12 +61,12 @@ const ActionAccordion = ({ submitFunc, amt, setAmt, level, setLevel }) => {
                         label="Level"
                         onChange={(ev) => { setLevel(ev.target.value); submitFunc({ resLevel: ev.target.value }) }}
                     >
-                        <MenuItem value={2000}>&lt;2000</MenuItem>
-                        <MenuItem value={3000}>&lt;3000</MenuItem>
-                        <MenuItem value={4000}>&lt;4000</MenuItem>
-                        <MenuItem value={5000}>&lt;5000</MenuItem>
-                        <MenuItem value={6000}>&lt;6000</MenuItem>
-                        <MenuItem value={7000}>&lt;7000</MenuItem>
+                        <MenuItem value={2000}>&lt; 2000</MenuItem>
+                        <MenuItem value={3000}>&lt; 3000</MenuItem>
+                        <MenuItem value={4000}>&lt; 4000</MenuItem>
+                        <MenuItem value={5000}>&lt; 5000</MenuItem>
+                        <MenuItem value={6000}>&lt; 6000</MenuItem>
+                        <MenuItem value={7000}>&lt; 7000</MenuItem>
                     </Select>
                 </FormControl>
             </AccTab>

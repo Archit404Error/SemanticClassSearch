@@ -11,7 +11,6 @@ const CourseQueries = () => {
 
     const fetchSimiliarCourses = async ({ userQuery = query, resAmt = amt, resLevel = level } = {}) => {
         setQuery(userQuery)
-        console.log(`QUERY: ${userQuery}`)
         if (userQuery === '') return;
         let res = await fetch(`https://backend.cornellcourses.org/search?query=${userQuery}&amt=${resAmt}`)
         setCourses(await res.json())
@@ -40,7 +39,7 @@ const CourseQueries = () => {
                     }
                 </div>
                 {
-                    courses.length > 0 &&
+                    courses.length > 0 && window.innerWidth > 600 &&
                     <ActionAccordion
                         submitFunc={fetchSimiliarCourses}
                         query={query}
