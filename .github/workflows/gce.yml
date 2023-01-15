@@ -65,8 +65,6 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
-            sudo su
-            docker rmi -f sem-class
-            docker login -u $DOCKER_USER -p $DOCKER_PASS
-            docker pull 4architmehta/sem-class
-            docker run -dp 443:8000 --mount type=bind,source=/etc/letsencrypt,target=/etc/letsencrypt sem-class
+            sudo docker stop sem-cls-backend
+            sudo docker pull 4architmehta/sem-class:$GITHUB_SHA
+            sudo docker run -dp 443:8000 --name sem-cls-backend --mount type=bind,source=/etc/letsencrypt,target=/etc/letsencrypt 4architmehta/sem-class:$GITHUB_SHA
