@@ -41,3 +41,9 @@ span {
 .smallMargin {
   margin-top: 10px;
 }
+
+.sideBar {
+  background-color: '#3E4451';
+  padding: 10px;
+  text-align: 'left';
+}

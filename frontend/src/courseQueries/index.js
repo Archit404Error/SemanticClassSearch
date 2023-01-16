@@ -1,8 +1,9 @@
-import { useState } from "react"
-import SearchBar from "./searchbar"
-import '../App.css';
-import ActionAccordion from "./accordion";
 import { Alert } from "@mui/material";
+import { useState } from "react";
+import '../App.css';
+import JobQuery from "../sideBar/jobQuery";
+import ActionAccordion from "./accordion";
+import SearchBar from "./searchbar";
 
 const CourseQueries = () => {
     const [courses, setCourses] = useState([])
@@ -48,19 +49,25 @@ const CourseQueries = () => {
                         ))
                     }
                 </div>
-                {
-                    courses.length > 0 && window.innerWidth > 600 &&
-                    <ActionAccordion
-                        submitFunc={fetchSimiliarCourses}
-                        query={query}
-                        amt={amt}
-                        setAmt={setAmt}
-                        dep={dep}
-                        setDep={setDep}
-                        level={level}
-                        setLevel={setLevel}
-                    />
-                }
+                <div style={{ flexDirection: 'column', position: 'sticky', top: 30, alignSelf: 'flex-start', margin: 30 }}>
+                    {
+                        courses.length > 0 && window.innerWidth > 600 &&
+                        <ActionAccordion
+                            submitFunc={fetchSimiliarCourses}
+                            query={query}
+                            amt={amt}
+                            setAmt={setAmt}
+                            dep={dep}
+                            setDep={setDep}
+                            level={level}
+                            setLevel={setLevel}
+                        />
+                    }
+                    {
+                        courses.length > 0 && window.innerWidth > 600 &&
+                        <JobQuery />
+                    }
+                </div>
             </div>
         </div>
     )
