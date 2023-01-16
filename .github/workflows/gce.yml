@@ -49,3 +49,4 @@ jobs:
             sudo docker rmi $(sudo docker images -q 4architmehta/sem-class)
             sudo docker pull "4architmehta/sem-class:${SEM_IMG_TAG}"
             sudo docker run -dp 443:8000 --name sem-cls-backend --mount type=bind,source=/etc/letsencrypt,target=/etc/letsencrypt "4architmehta/sem-class:${SEM_IMG_TAG}"
+            yes | sudo docker container prune
