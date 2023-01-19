@@ -4,6 +4,7 @@ import '../App.css';
 import JobQuery from "../sideBar/jobQuery";
 import ActionAccordion from "./accordion";
 import SearchBar from "./searchbar";
+import { DEV_URL, PROD_URL } from "../constants";
 
 const CourseQueries = () => {
     const [courses, setCourses] = useState([])
@@ -12,11 +13,11 @@ const CourseQueries = () => {
     const [level, setLevel] = useState(7000)
     const [dep, setDep] = useState('None')
 
-    const fetchSimiliarCourses = async ({ userQuery = query, resAmt = amt, resDep = dep, resLevel = level } = {}) => {
+    const fetchSimilarCourses = async ({ userQuery = query, resAmt = amt, resDep = dep, resLevel = level } = {}) => {
         setQuery(userQuery)
         if (userQuery === '') return;
         let res = await fetch(
-            `https://backend.cornellcourses.org/search?query=${userQuery}&amt=${resAmt}&dep=${resDep}&level=${resLevel}`
+            `${PROD_URL}/search?query=${userQuery}&amt=${resAmt}&dep=${resDep}&level=${resLevel}`
         )
         const courseData = await res.json()
         if (courseData.length === 0) {
@@ -29,7 +30,7 @@ const CourseQueries = () => {
 
     return (
         <div>
-            <SearchBar submitFunc={fetchSimiliarCourses} />
+            <SearchBar submitFunc={fetchSimilarCourses} />
             <div style={{ display: 'flex' }}>
                 <div style={{ marginLeft: '10vw' }}>
                     {
@@ -53,7 +54,7 @@ const CourseQueries = () => {
                     {
                         courses.length > 0 && window.innerWidth > 600 &&
                         <ActionAccordion
-                            submitFunc={fetchSimiliarCourses}
+                            submitFunc={fetchSimilarCourses}
                             query={query}
                             amt={amt}
                             setAmt={setAmt}
@@ -65,7 +66,7 @@ const CourseQueries = () => {
                     }
                     {
                         courses.length > 0 && window.innerWidth > 600 &&
-                        <JobQuery />
+                        <JobQuery submitFunc={fetchSimilarCourses} />
                     }
                 </div>
             </div>

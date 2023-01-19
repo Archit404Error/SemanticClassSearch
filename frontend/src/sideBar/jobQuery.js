@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Alert, Button, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 
-const JobQuery = () => {
+const JobQuery = ({ submitFunc }) => {
     const [query, setQuery] = useState("")
-    const [searched, setSearched] = useState(false)
 
     return (
         <div style={{ backgroundColor: '#3E4451', padding: 20, textAlign: 'left', borderRadius: 10 }}>
@@ -18,10 +17,7 @@ const JobQuery = () => {
                 sx={{ width: "100%", marginBottom: '20px' }}
             />
             <Button variant="text" onClick={() => setQuery('')}>Clear</Button>
-            <Button variant="outlined" sx={{ position: 'absolute', right: 20 }} onClick={() => setSearched(true)}>Search</Button>
-            {searched &&
-                <Alert severity="info" sx={{ marginTop: '20px' }}>This features is coming soon!</Alert>
-            }
+            <Button variant="outlined" sx={{ position: 'absolute', right: 20 }} onClick={() => submitFunc({ userQuery: encodeURIComponent(query) })}>Search</Button>
         </div>
     )
 }

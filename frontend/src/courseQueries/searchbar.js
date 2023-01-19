@@ -11,7 +11,7 @@ const SearchBar = ({ submitFunc }) => {
             label="Ex: Generative AI, Starting a Business, Adventurous Outdoor PE Sports"
             onKeyDown={event => {
                 if (event.key === 'Enter') {
-                    const payload = event.target.value.replaceAll(' ', '+')
+                    const payload = encodeURIComponent(event.target.value)
                     setQuery(payload)
                     submitFunc({ userQuery: payload })
                 } else {
@@ -33,7 +33,7 @@ const SearchBar = ({ submitFunc }) => {
             InputProps={{
                 endAdornment: (
                     <InputAdornment>
-                        <IconButton onClick={() => submitFunc({ userQuery: query.replaceAll(' ', '+') })}>
+                        <IconButton onClick={() => submitFunc({ userQuery: encodeURIComponent(query) })}>
                             <SearchIcon style={{ color: "#61dafb" }} />
                         </IconButton>
                     </InputAdornment>
