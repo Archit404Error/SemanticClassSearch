@@ -52,7 +52,6 @@ def preprocess(text):
 
 
 def recommend_courses(inp, num_recs, dep, level):
-    inp = inp.replace("+", " ")
     inf = vec_model.infer_vector(preprocess(inp))
     sims = vec_model.dv.most_similar([inf], topn=100)
     gen_courses = []
