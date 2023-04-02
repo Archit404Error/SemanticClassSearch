@@ -1,11 +1,6 @@
-import { Stack } from "expo-router"
-import { ThemeProvider } from '@rneui/themed';
+import { Slot } from "expo-router"
 
-const RootLayout = () => (
-    <ThemeProvider>
-        <Stack screenOptions={{ headerShown: false }} />
-    </ThemeProvider>
-)
+const RootLayout = () => <Slot />
 
 
 export default RootLayout;

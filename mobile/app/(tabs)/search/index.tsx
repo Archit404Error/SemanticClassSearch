@@ -52,18 +52,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     parent: {
-        marginLeft: 25,
-        marginRight: 25,
         borderColor: "gray",
         backgroundColor: "white",
-        borderRadius: 5,
         borderWidth: 1,
         flexDirection: "row",
         justifyContent: "space-between",
-    },
-    closeButton: {
-        height: 16,
-        width: 16,
     },
     closeButtonParent: {
         justifyContent: "center",
@@ -73,7 +66,8 @@ const styles = StyleSheet.create({
     searchBar: {
         padding: 10,
         fontSize: 20,
-        color: "black"
+        color: "black",
+        flex: 1,
     },
 })
 

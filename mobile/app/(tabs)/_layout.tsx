@@ -5,7 +5,7 @@ const TabLayout = () => {
     return (
         <Tabs>
             <Tabs.Screen
-                name="search/index"
+                name="search"
                 options={{
                     title: "Search",
                     tabBarIcon: () => <TabIcon name="search" />
