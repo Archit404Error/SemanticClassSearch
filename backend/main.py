@@ -1,4 +1,5 @@
 import urllib.parse
+import json
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
@@ -19,6 +20,12 @@ def search():
     dep = request.args.get("dep")
     level = int(request.args.get("level"))
     return jsonify(recommend_courses(query, amt, dep, level))
+
+@app.route("/course-info", methods=["GET"])
+@cross_origin()
+def info():
+    course = urllib.parse.unquote_plus(request.args.get("course"))
+    return jsonify(json.load(open('prediction/searchable_classes.json', 'r'))[course])
 
 
 if __name__ == "__main__":
