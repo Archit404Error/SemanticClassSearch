@@ -21,7 +21,7 @@ const CourseCard = ({ title, dept, number, similarity, desc }: CourseRec) => {
                 <RoundButton
                     icon={<Ionicons name="eye-outline" style={styles.subcardIcon} />}
                     subtitle="Info"
-                    pressFunc={() => router.push(`/search/${dept}${number}`)}
+                    pressFunc={() => router.push(`/search/${dept}?num=${number}`)}
                 />
                 <RoundButton
                     icon={<Ionicons name="share-outline" style={styles.subcardIcon} />}

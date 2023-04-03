@@ -8,7 +8,14 @@ const TabLayout = () => {
                 name="search"
                 options={{
                     title: "Search",
-                    tabBarIcon: () => <TabIcon name="search" />
+                    tabBarIcon: () => <TabIcon name="search" />,
+                }}
+            />
+            <Tabs.Screen
+                name="favorites"
+                options={{
+                    title: "Favorites",
+                    tabBarIcon: () => <TabIcon name="star" />,
                 }}
             />
         </Tabs>
