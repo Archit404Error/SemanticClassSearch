@@ -17,7 +17,7 @@ const CourseCard = (props: CourseRec) => {
         <View style={styles.cardContainer}>
             <Text style={styles.cardTitle}>{title} ({dept} {number})</Text>
             <Text style={styles.aiHeader}>
-                {(similarity * 100).toFixed(2)}% Query Similarity
+                {similarity && (similarity * 100).toFixed(2)}% Query Similarity
             </Text>
             <Text style={styles.cardBody}>{desc}</Text>
             <View style={styles.horizontalView}>
@@ -38,7 +38,10 @@ const CourseCard = (props: CourseRec) => {
                 <RoundButton
                     icon={<Ionicons name="eye-outline" style={styles.subcardIcon} />}
                     subtitle="Info"
-                    pressFunc={() => router.push(`/search/${dept}?num=${number}`)}
+                    pressFunc={() => router.push(
+                        `/search/${dept}?num=${number}` +
+                        `&title=${encodeURIComponent(title)}&desc=${encodeURIComponent(desc)}`
+                    )}
                 />
                 <RoundButton
                     icon={<Ionicons name="share-outline" style={styles.subcardIcon} />}

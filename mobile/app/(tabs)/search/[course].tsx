@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView, ScrollView, View, Text, StyleSheet } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import RoundButton from "../../../components/buttons/roundButton";
 import { ROSTER_API_4, SERVER_URL } from "../../../constants";
+import { useFavContext } from "../../../context/favoriteContext";
 
 interface CourseInfo {
     catalogComments?: string,
@@ -15,9 +18,19 @@ interface CourseInfo {
 }
 
 const CourseDetails = () => {
-    const [courseInfo, setCourseInfo] = useState<CourseInfo>()
-    const { course, num } = useLocalSearchParams();
+    const { course, num, title, desc } = useLocalSearchParams();
+    const courseData: CourseRec = {
+        dept: course as string,
+        number: num as string,
+        title: title as string,
+        desc: desc as string,
+    }
+    const { favorites, addFavorite, removeFavorite } = useFavContext();
 
+    const [courseInfo, setCourseInfo] = useState<CourseInfo>()
+    const [isFavorited, setFavorited] = useState(
+        favorites.filter(cls => (`${cls.dept} ${cls.number}` === `${course} ${num}`)).length != 0
+    );
     useEffect(() => {
         fetch(`${SERVER_URL}/course-info?course=${course}+${num}`)
             .then(res => res.json())
@@ -38,6 +51,26 @@ const CourseDetails = () => {
                         <Text key={`outcome${idx}`} style={styles.subheader}>- {outcome}</Text>)
                 }
                 <Text style={styles.subheader}>Requirements: {courseInfo?.catalogPrereqCoreq}</Text>
+                <View style={styles.horizontalView}>
+                    {!isFavorited &&
+                        <RoundButton
+                            icon={<Ionicons name="star" style={styles.subcardIcon} />}
+                            subtitle="Favorite"
+                            pressFunc={() => { setFavorited(true); addFavorite(courseData) }}
+                        />
+                    }
+                    {isFavorited &&
+                        <RoundButton
+                            icon={<Ionicons name="star" style={styles.subcardIcon} />}
+                            subtitle="Remove"
+                            pressFunc={() => { setFavorited(false); removeFavorite(courseData) }}
+                        />
+                    }
+                    <RoundButton
+                        icon={<Ionicons name="share-outline" style={styles.subcardIcon} />}
+                        subtitle="Share"
+                    />
+                </View>
             </ScrollView>
         </SafeAreaView>
     )
@@ -58,6 +91,16 @@ const styles = StyleSheet.create({
     },
     subheader: {
         fontSize: 18,
+        marginBottom: 10,
+    },
+    horizontalView: {
+        flex: 1,
+        flexDirection: "row",
+        marginTop: 10,
+    },
+    subcardIcon: {
+        fontSize: 25,
+        color: "white",
         marginBottom: 10,
     },
 })

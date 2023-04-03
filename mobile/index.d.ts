@@ -2,6 +2,6 @@ interface CourseRec {
   dept: string;
   desc: string;
   number: string;
-  similarity: number;
+  similarity?: number;
   title: string;
 }

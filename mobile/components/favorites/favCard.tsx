@@ -9,7 +9,12 @@ const FavCard = ({ title, dept, number, desc }: CourseRec) => {
 
     return (
         <TouchableOpacity
-            onPress={() => router.push(`/search/${dept}?num=${number}`)}
+            onPress={() =>
+                router.push(
+                    `/search/${dept}?num=${number}` +
+                    `&title=${encodeURIComponent(title)}&desc=${encodeURIComponent(desc)}`
+                )
+            }
             style={styles.cardContainer}
         >
             <Text style={styles.cardTitle}>{title} ({dept} {number})</Text>

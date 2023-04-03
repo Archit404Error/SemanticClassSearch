@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
-import { storeLocal, getStored } from "../../../utils/localStorage";
 import { SafeAreaView, ScrollView } from "react-native";
 import { useFavContext } from "../../../context/favoriteContext";
 import FavCard from "../../../components/favorites/favCard";
 
 const favorites = () => {
-    const { favorites, addFavorite, removeFavorite } = useFavContext() || { favorites: [], };
+    const { favorites } = useFavContext() || { favorites: [], };
 
     return (
         <SafeAreaView>
