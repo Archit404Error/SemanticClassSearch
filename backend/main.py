@@ -12,7 +12,7 @@ app.config["CORS_HEADERS"] = "Content-Type"
 Talisman(app, content_security_policy=None)
 
 
-@app.route("/search")
+@app.route("/search", methods=["GET"])
 @cross_origin()
 def search():
     query = urllib.parse.unquote_plus(request.args.get("query"))

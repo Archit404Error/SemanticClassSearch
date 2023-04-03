@@ -48,5 +48,5 @@ jobs:
             sudo docker stop sem-cls-backend-web-1
             sudo docker rm sem-cls-backend-web-1
             sudo docker rmi $(sudo docker images -q 4architmehta/sem-class)
-            sudo docker compose -p sem-cls-backend -d up
+            sudo docker compose -p sem-cls-backend up -d
             yes | sudo docker container prune
