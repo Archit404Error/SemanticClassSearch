@@ -25,7 +25,7 @@ def search():
 @cross_origin()
 def info():
     course = urllib.parse.unquote_plus(request.args.get("course"))
-    return jsonify(json.load(open('prediction/searchable_classes.json', 'r'))[course])
+    return jsonify(json.load(open('prediction/search_cls.json', 'r'))[course])
 
 
 if __name__ == "__main__":
