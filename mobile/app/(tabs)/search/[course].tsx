@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useLocalSearchParams } from "expo-router";
-import { SafeAreaView, ScrollView, View, Text, StyleSheet } from "react-native";
+import { SafeAreaView, ScrollView, View, Text, StyleSheet, Share } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import RoundButton from "../../../components/buttons/roundButton";
 import { ROSTER_API_4, SERVER_URL } from "../../../constants";
 import { useFavContext } from "../../../context/favoriteContext";
+import * as Linking from 'expo-linking';
 
 interface CourseInfo {
     catalogComments?: string,
@@ -69,6 +70,12 @@ const CourseDetails = () => {
                     <RoundButton
                         icon={<Ionicons name="share-outline" style={styles.subcardIcon} />}
                         subtitle="Share"
+                        pressFunc={() => {
+                            Share.share({
+                                url: Linking.createURL(`/search/${course}?num=${num}` +
+                                    `&title=${encodeURIComponent(title as string)}&desc=${encodeURIComponent(desc as string)}`)
+                            })
+                        }}
                     />
                 </View>
             </ScrollView>

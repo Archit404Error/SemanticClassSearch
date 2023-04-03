@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Share } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import RoundButton from "../buttons/roundButton";
 import { useRouter } from "expo-router";
 import { useFavContext } from "../../context/favoriteContext";
 import { useState } from "react";
+import * as Linking from 'expo-linking';
 
 const CourseCard = (props: CourseRec) => {
     const { title, dept, desc, number, similarity } = props;
@@ -46,6 +47,10 @@ const CourseCard = (props: CourseRec) => {
                 <RoundButton
                     icon={<Ionicons name="share-outline" style={styles.subcardIcon} />}
                     subtitle="Share"
+                    pressFunc={() => Share.share({
+                        url: Linking.createURL(`/search/${dept}?num=${number}` +
+                            `&title=${encodeURIComponent(title)}&desc=${encodeURIComponent(desc)}`)
+                    })}
                 />
             </View>
         </View>
