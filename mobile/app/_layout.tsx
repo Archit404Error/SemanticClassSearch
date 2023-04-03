@@ -1,6 +1,11 @@
 import { Slot } from "expo-router"
+import { FavProvider } from "../context/favoriteContext";
 
-const RootLayout = () => <Slot />
+const RootLayout = () => (
+    <FavProvider>
+        <Slot />
+    </FavProvider>
+)
 
 
 export default RootLayout;

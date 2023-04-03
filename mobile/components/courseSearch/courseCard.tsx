@@ -2,9 +2,16 @@ import { StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import RoundButton from "../buttons/roundButton";
 import { useRouter } from "expo-router";
+import { useFavContext } from "../../context/favoriteContext";
+import { useState } from "react";
 
-const CourseCard = ({ title, dept, number, similarity, desc }: CourseRec) => {
+const CourseCard = (props: CourseRec) => {
+    const { title, dept, desc, number, similarity } = props;
     const router = useRouter();
+    const { favorites, addFavorite, removeFavorite } = useFavContext() || { favorites: [], };
+    const [isFavorited, setFavorited] = useState(
+        favorites.filter(course => (`${course.dept} ${course.number}` === `${dept} ${number}`)).length != 0
+    );
 
     return (
         <View style={styles.cardContainer}>
@@ -14,10 +21,20 @@ const CourseCard = ({ title, dept, number, similarity, desc }: CourseRec) => {
             </Text>
             <Text style={styles.cardBody}>{desc}</Text>
             <View style={styles.horizontalView}>
-                <RoundButton
-                    icon={<Ionicons name="star" style={styles.subcardIcon} />}
-                    subtitle="Favorite"
-                />
+                {!isFavorited &&
+                    <RoundButton
+                        icon={<Ionicons name="star" style={styles.subcardIcon} />}
+                        subtitle="Favorite"
+                        pressFunc={() => { setFavorited(true); addFavorite(props) }}
+                    />
+                }
+                {isFavorited &&
+                    <RoundButton
+                        icon={<Ionicons name="star" style={styles.subcardIcon} />}
+                        subtitle="Remove"
+                        pressFunc={() => { setFavorited(false); removeFavorite(props) }}
+                    />
+                }
                 <RoundButton
                     icon={<Ionicons name="eye-outline" style={styles.subcardIcon} />}
                     subtitle="Info"
