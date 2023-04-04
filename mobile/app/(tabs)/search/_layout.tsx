@@ -1,11 +1,9 @@
 import { Stack } from "expo-router"
-import { ThemeProvider } from '@rneui/themed';
-import { FavProvider } from "../../../context/favoriteContext";
 
 const SearchLayout = () => (
-    <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="index" />
-        <Stack.Screen name="[course]" />
+    <Stack screenOptions={{ headerTintColor: "white", headerStyle: { backgroundColor: "#4d9bf0" } }}>
+        <Stack.Screen name="index" options={{ title: "Search" }} />
+        <Stack.Screen name="[course]" options={{ title: "Course Details" }} />
     </Stack>
 )
 

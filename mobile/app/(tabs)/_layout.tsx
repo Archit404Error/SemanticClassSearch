@@ -9,6 +9,7 @@ const TabLayout = () => {
                 options={{
                     title: "Search",
                     tabBarIcon: () => <TabIcon name="search" />,
+                    headerShown: false
                 }}
             />
             <Tabs.Screen

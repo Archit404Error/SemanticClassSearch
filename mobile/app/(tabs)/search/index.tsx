@@ -20,21 +20,24 @@ const Search = () => {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
-                <View style={styles.parent}>
-                    <TextInput
-                        value={query}
-                        onChangeText={setQuery}
-                        onSubmitEditing={async () => setRecs(await courseRecs(query))}
-                        placeholder="Search for classes..."
-                        style={styles.searchBar}
-                        inputAccessoryViewID={doneWrapperId}
-                    />
-                    <TouchableOpacity
-                        style={styles.closeButtonParent}
-                        onPress={() => setQuery("")}
-                    >
-                        <Ionicons name="close-circle-outline" size={30} />
-                    </TouchableOpacity>
+                <View style={{ backgroundColor: "#4d9bf0" }}>
+                    <View style={styles.searchParent}>
+                        <TextInput
+                            value={query}
+                            onChangeText={setQuery}
+                            onSubmitEditing={async () => setRecs(await courseRecs(query))}
+                            placeholder="Search for classes..."
+                            placeholderTextColor={"#cccccc"}
+                            style={styles.searchBar}
+                            inputAccessoryViewID={doneWrapperId}
+                        />
+                        <TouchableOpacity
+                            style={styles.closeButtonParent}
+                            onPress={() => setQuery("")}
+                        >
+                            <Ionicons name="close-circle-outline" size={30} />
+                        </TouchableOpacity>
+                    </View>
                 </View>
                 {
                     recs?.map((rec, index) => <CourseCard key={`rec${index}`} {...rec} />)
@@ -51,10 +54,12 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "center",
     },
-    parent: {
-        borderColor: "gray",
+    searchParent: {
         backgroundColor: "white",
-        borderWidth: 1,
+        marginLeft: 10,
+        marginRight: 10,
+        marginBottom: 10,
+        borderRadius: 5,
         flexDirection: "row",
         justifyContent: "space-between",
     },
