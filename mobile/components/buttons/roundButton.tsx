@@ -1,4 +1,3 @@
-import { useRouter } from "expo-router";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
 const RoundButton = ({ icon, subtitle, pressFunc }: any) => {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useNavigation, useRouter, useSearchParams } from "expo-router";
 import { SafeAreaView, ScrollView, View, Text, StyleSheet, Share } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import RoundButton from "../../../components/buttons/roundButton";
@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         marginTop: 10,
+        marginBottom: 10,
     },
     subcardIcon: {
         fontSize: 25,

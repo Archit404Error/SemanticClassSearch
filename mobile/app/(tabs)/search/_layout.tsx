@@ -1,5 +1,6 @@
 import { Stack } from "expo-router"
 import { ThemeProvider } from '@rneui/themed';
+import { FavProvider } from "../../../context/favoriteContext";
 
 const SearchLayout = () => (
     <Stack screenOptions={{ headerShown: false }}>

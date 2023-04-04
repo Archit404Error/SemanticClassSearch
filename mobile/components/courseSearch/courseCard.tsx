@@ -3,7 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import RoundButton from "../buttons/roundButton";
 import { useRouter } from "expo-router";
 import { useFavContext } from "../../context/favoriteContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Linking from 'expo-linking';
 
 const CourseCard = (props: CourseRec) => {
@@ -13,6 +13,10 @@ const CourseCard = (props: CourseRec) => {
     const [isFavorited, setFavorited] = useState(
         favorites.filter(course => (`${course.dept} ${course.number}` === `${dept} ${number}`)).length != 0
     );
+
+    useEffect(() => {
+        setFavorited(favorites.filter(course => (`${course.dept} ${course.number}` === `${dept} ${number}`)).length != 0)
+    }, [favorites])
 
     return (
         <View style={styles.cardContainer}>
