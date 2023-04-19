@@ -1,13 +1,20 @@
 import json
 import re
 
+import faiss
+import numpy as np
 from gensim.models import Doc2Vec
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+from sentence_transformers import SentenceTransformer
 
 course_data = json.load(open("./prediction/parsed_courses.json", "r"))
 vec_model = Doc2Vec.load("./prediction/course_embeddings.model")
 engl_stops = set(stopwords.words("english"))
+
+tuned_model = SentenceTransformer("prediction/course-embeddings")
+index = faiss.read_index("prediction/courses.index")
+norm_index = faiss.read_index("prediction/courses-normalized.index")
 
 
 class GeneratedCourse:
@@ -58,6 +65,53 @@ def recommend_courses(inp, num_recs, dep, level):
     titles = set()
     for i, pct in sims:
         course = GeneratedCourse(course_data[i], pct)
+        if (
+            (dep != "None" and course.dept != dep)
+            or int(course.number) > level
+            or course.title in titles
+        ):
+            continue
+
+        titles.add(course.title)
+        gen_courses.append(course.serialize())
+
+        if len(titles) == num_recs:
+            break
+    return gen_courses
+
+
+def recommend_courses_improved(query, num_recs, dep, level):
+    scores, indexes = index.search(tuned_model.encode([query]), 200)
+    indexes = list(indexes)[0]
+    scores = list(scores)[0]
+    gen_courses = []
+    titles = set()
+    for i, idx in enumerate(indexes):
+        course = GeneratedCourse(course_data[idx], float(scores[i]))
+        if (
+            (dep != "None" and course.dept != dep)
+            or int(course.number) > level
+            or course.title in titles
+        ):
+            continue
+
+        titles.add(course.title)
+        gen_courses.append(course.serialize())
+
+        if len(titles) == num_recs:
+            break
+    return gen_courses
+
+
+def recommend_courses_norm(query, num_recs, dep, level):
+    norm_query = (emb := tuned_model.encode([query])) / np.linalg.norm(emb)
+    scores, indexes = norm_index.search(norm_query, 200)
+    indexes = list(indexes)[0]
+    scores = list(scores)[0]
+    gen_courses = []
+    titles = set()
+    for i, idx in enumerate(indexes):
+        course = GeneratedCourse(course_data[idx], float(scores[i]))
         if (
             (dep != "None" and course.dept != dep)
             or int(course.number) > level

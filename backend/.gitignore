@@ -1,2 +1,4 @@
 env/
 __pycache__/
+prediction/*.index
+course-embeddings/
