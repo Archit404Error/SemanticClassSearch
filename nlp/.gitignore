@@ -1,4 +1,4 @@
 env/
 *.index
 models/
-synthetic_queries.json
+json/
