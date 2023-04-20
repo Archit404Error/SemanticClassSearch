@@ -9,11 +9,11 @@ from nltk.tokenize import word_tokenize
 from sentence_transformers import SentenceTransformer
 
 course_data = json.load(open("./prediction/parsed_courses.json", "r"))
-vec_model = Doc2Vec.load("./prediction/course_embeddings.model")
+vec_model = Doc2Vec.load("./prediction_old/course_embeddings.model")
 engl_stops = set(stopwords.words("english"))
 
 tuned_model = SentenceTransformer("prediction/course-embeddings")
-index = faiss.read_index("prediction/courses.index")
+# index = faiss.read_index("prediction/courses.index")
 norm_index = faiss.read_index("prediction/courses-normalized.index")
 
 
@@ -22,7 +22,8 @@ class GeneratedCourse:
         self.dept = parsed_data[0]
         self.number = parsed_data[1]
         self.title = parsed_data[2]
-        self.desc = parsed_data[3]
+        self.title_full = parsed_data[3]
+        self.desc = parsed_data[4]
         self.sim_pct = sim_pct
 
     def serialize(self):
