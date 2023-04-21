@@ -4,7 +4,7 @@ import urllib.parse
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 
-from nlp_utils import recommend_courses, recommend_courses_norm
+from nlp_utils import recommend_courses_norm
 
 # from flask_talisman import Talisman
 
@@ -15,6 +15,7 @@ app.config["CORS_HEADERS"] = "Content-Type"
 # Talisman(app, content_security_policy=None)
 
 
+"""
 @app.route("/search", methods=["GET"])
 @cross_origin()
 def search():
@@ -25,7 +26,6 @@ def search():
     return jsonify(recommend_courses(query, amt, dep, level))
 
 
-"""
 @app.route("/search-improved", methods=["GET"])
 @cross_origin()
 def search_improved():

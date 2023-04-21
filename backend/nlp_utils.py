@@ -9,7 +9,7 @@ from nltk.tokenize import word_tokenize
 from sentence_transformers import SentenceTransformer
 
 course_data = json.load(open("./prediction/parsed_courses.json", "r"))
-vec_model = Doc2Vec.load("./prediction_old/course_embeddings.model")
+# vec_model = Doc2Vec.load("./prediction_old/course_embeddings.model")
 engl_stops = set(stopwords.words("english"))
 
 tuned_model = SentenceTransformer("prediction/course-embeddings")
