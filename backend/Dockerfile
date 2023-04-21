@@ -7,4 +7,4 @@ RUN pip3 install -r requirements.txt
 RUN python -m nltk.downloader stopwords
 RUN python -m nltk.downloader punkt
 EXPOSE 8000
-CMD ["python3", "-m", "gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "main:app", "--timeout", "120"]
+CMD ["python3", "-m", "gunicorn", "-w", "1", "-b", "0.0.0.0:8000", "main:app", "--timeout", "120"]
