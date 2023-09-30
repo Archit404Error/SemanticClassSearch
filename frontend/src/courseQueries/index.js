@@ -17,7 +17,7 @@ const CourseQueries = () => {
         setQuery(userQuery)
         if (userQuery === '') return;
         let res = await fetch(
-            `${DEV_URL}/search-norm?query=${userQuery}&amt=${resAmt}&dep=${resDep}&level=${resLevel}`
+            `${PROD_URL}/search-norm?query=${userQuery}&amt=${resAmt}&dep=${resDep}&level=${resLevel}`
         )
         const courseData = await res.json()
         if (courseData.length === 0) {

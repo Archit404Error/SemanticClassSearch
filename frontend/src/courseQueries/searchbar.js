@@ -15,7 +15,7 @@ const SearchBar = ({ submitFunc }) => {
                     setQuery(payload)
                     submitFunc({ userQuery: payload })
                 } else {
-                    setQuery(event.target.value)
+                    setQuery(event.target.value + event.key)
                 }
             }}
             sx={{
